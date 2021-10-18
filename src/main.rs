@@ -13,6 +13,7 @@ fn main() {
     let opt = Opt::from_args();
     match opt.day {
         1 => aoc2019::day01::run(),
+        2 => aoc2019::day02::run(),
         _ => println!("Unregonised day argument"),
     };
 }

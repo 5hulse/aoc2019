@@ -1,10 +1,7 @@
-use std::fs;
-use std::io::Read;
+use crate::load_input;
 
 pub fn run() {
-    let mut file = fs::File::open("src/data/01.txt").unwrap();
-    let mut contents = String::new();
-    file.read_to_string(&mut contents).unwrap();
+    let contents = load_input("data/01.txt");
     let masses: Vec<u32> = contents
         .split("\n")
         .filter(|s| !s.is_empty())
