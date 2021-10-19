@@ -44,15 +44,33 @@ impl Program {
 
 pub fn run() {
     let contents = load_input("data/02.txt");
-    let code: Vec<i32> = contents
+    let cached_code: Vec<i32> = contents
         .trim()
         .split(",")
         .filter(|s| !s.is_empty())
         .map(|s| s.parse::<i32>().unwrap())
         .collect();
-    let mut program = Program::new(code);
+    let mut mut_code = cached_code.clone();
+    mut_code[1] = 12;
+    mut_code[2] = 2;
+    let mut program = Program::new(mut_code);
     program.run_program();
-    println!("Value at position 0: {}", program.code[0]);
+    println!("PART I: Value at position 0: {}", program.code[0]);
+
+    for noun in 0..99 {
+        for verb in 0..99 {
+            let mut mut_code = cached_code.clone();
+            mut_code[1] = noun;
+            mut_code[2] = verb;
+            let mut program = Program::new(mut_code);
+            program.run_program();
+            if program.code[0] == 19690720 {
+                println!("PART II: Noun and verb which return 19690720: {}, {}", noun, verb);
+                println!("         100 * noun + verb = {}", 100 * noun + verb);
+                break
+            }
+        }
+    }
 }
 
 #[test]
